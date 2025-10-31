@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+types/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Output of 'npm pack'
+*.tgz

@@ -1,7 +1,10 @@
-import { Observer, Unsubscribe } from "./observer";
-import { Lens } from "./lens";
-import { ForEach } from "./foreach";
+import { Observer, Unsubscribe } from "./Observer";
+import { Lens } from "../lens/lens";
+import { ForEach } from "./ForEach";
 
+/**
+ *  Minimal Signal interface. Use createSignal to create a full Signal.
+ */
 export interface SignalLike<T> {
   get(): T;
   subscribe(observer: Observer<void>): Unsubscribe;

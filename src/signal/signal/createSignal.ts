@@ -1,16 +1,13 @@
-import { SignalLike } from "./signal";
-import {
-  mapSignal,
-  filterSignal,
-  viewSignal,
-  cachedSignal,
-  debounceSignal,
-} from "./signal-transform";
-import type { Signal } from "./signal";
-import { Observer, Unsubscribe } from "./observer";
-import { keyOrLens2Lens, Lens } from "./lens";
+import { SignalLike } from "../interfaces/Signal";
+import { mapSignal } from "./mapSignal";
+import { filterSignal } from "./filterSignal";
+import { viewSignal } from "./viewSignal";
+import { cachedSignal } from "./cachedSignal";
+import { debounceSignal } from "./debounceSignal";
+import type { Signal } from "../interfaces/Signal";
+import { Observer, Unsubscribe } from "../interfaces/Observer";
+import { keyOrLens2Lens } from "../lens/lens";
 import { log } from "./log";
-import { atomFromValue } from "./atom";
 
 export function createSignal<T>(s: SignalLike<T>): Signal<T> {
   return {
@@ -64,38 +61,3 @@ export function createSignal<T>(s: SignalLike<T>): Signal<T> {
   };
 }
 
-export function constantSignal<T>(value: T): Signal<T> {
-  return createSignal<T>({
-    get() {
-      return value;
-    },
-    subscribe(): Unsubscribe {
-      return () => {};
-    },
-  });
-}
-
-export type PromiseState<T> =
-  | { state: "pending" }
-  | { state: "resolved"; value: T }
-  | { state: "rejected"; error: any };
-
-export function signalFromPromise<T>(
-  promise: Promise<T>
-): Signal<PromiseState<T>> {
-  const state = atomFromValue<PromiseState<T>>({ state: "pending" });
-  promise
-    .then((value) => {
-      state.set({ state: "resolved", value });
-    })
-    .catch((error) => {
-      state.set({ state: "rejected", error });
-    });
-  return state;
-}
-
-export function isSignal(obj: any): obj is Signal<any> {
-  return (
-    obj && typeof obj.get === "function" && typeof obj.observe === "function"
-  );
-}

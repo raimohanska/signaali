@@ -1,4 +1,4 @@
-import { Observer, Unsubscribe } from "./observer";
+import { Observer, Unsubscribe } from "./Observer";
 
 export interface ForEach<T> {
   forEach: ForEachFn<T>;

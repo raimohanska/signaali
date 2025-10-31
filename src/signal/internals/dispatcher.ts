@@ -1,4 +1,4 @@
-import { Observer, Unsubscribe } from "./observer";
+import { Observer, Unsubscribe } from "../interfaces/Observer";
 
 export type Callback = () => void;
 

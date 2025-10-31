@@ -1,6 +1,6 @@
 {
   "name": "signaali",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "description": "A nice abstraction that's also flexible and performant state management tool",
   "module": "./dist/esm/index.js",

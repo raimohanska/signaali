@@ -101,3 +101,9 @@ npm run example first
 ```
 
 Hopefully I get to make more.
+
+## Should I use it?
+
+Probably not.
+
+Might try tho: `npm install signaali`. Haven't used it in any real applications :)
